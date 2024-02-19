@@ -54,7 +54,12 @@ set_source_files_properties(${SRC_WRAPPER_FILE} PROPERTIES GENERATED TRUE)
 
 if(APPLE)
 	# build universal binaries by default
-	set(CMAKE_OSX_ARCHITECTURES "x86_64")
+	if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
+		set(CMAKE_OSX_ARCHITECTURES "arm64")
+	endif()
+	if(CMAKE_SYSTEM_PROCESSOR  MATCHES "x86_64")
+		set(CMAKE_OSX_ARCHITECTURES "x86_64")
+	endif()
 endif()
 
 include_directories(

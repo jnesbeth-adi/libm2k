@@ -5,7 +5,12 @@ set(BUILD_SHARED_LIBS ON CACHE BOOL "Build shared libraries")
 
 if(APPLE)
 	# build universal binaries by default
-	set(CMAKE_OSX_ARCHITECTURES "x86_64")
+	if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
+		set(CMAKE_OSX_ARCHITECTURES "arm64")
+	endif()
+	if(CMAKE_SYSTEM_PROCESSOR  MATCHES "x86_64")
+		set(CMAKE_OSX_ARCHITECTURES "x86_64")
+	endif()
 endif()
 
 if(MSVC)
